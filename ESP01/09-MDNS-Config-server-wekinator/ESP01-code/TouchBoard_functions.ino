@@ -9,7 +9,7 @@ void receiveFromSerial() {
 
     //Analog Pins Values
 
-  
+
     if (inChar == 'a') {
       analogValues[0] = inString.toInt();
       inString = "";
@@ -30,10 +30,10 @@ void receiveFromSerial() {
       analogValues[4] = inString.toInt();
       inString = "";
     }
-      if (inChar == '<') {
+    if (inChar == '<') {
       analogValues[5] = inString.toInt();
       inString = "";
-     // StringReady = true;
+      // StringReady = true;
     }
 
     if (inChar == 'l') {
@@ -93,21 +93,28 @@ void receiveFromSerial() {
 
 
 
-void ProximitySendToOsc(int valElectrode[]) {
-  for (byte i = 0; i < 12; i++) {
-    String addr_prefix = "/proximity/";
-    String addr_suffix = String(i);
-    String completeaddress = addr_prefix + addr_suffix;
-    const char * addr = completeaddress.c_str();
+void ProximitySendToOscWekinator(int valElectrode[]) {
 
-    OSCMessage msg(addr);
-    msg.add(valElectrode[i]);
-    Udp.beginPacket(outIp, outPort);
-    msg.send(Udp);
-    Udp.endPacket();
-    msg.empty();
-    delay(5); //delay(10)
+  String completeaddress = "/wek/inputs" ;
+  const char * addr = completeaddress.c_str();
+  String wekinatorMsg = "";
+  OSCMessage msg(addr);
+  for (byte i = 0; i < 12; i++) {
+    if (i != 11) {
+      msg.add(valElectrode[i] + " ");
+    } else {
+      msg.add(valElectrode[i]);
+    }
   }
+
+
+
+  Udp.beginPacket(outIp, outPort);
+  msg.send(Udp);
+  Udp.endPacket();
+  msg.empty();
+  delay(5); //delay(10)
+
 }
 
 /*

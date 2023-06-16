@@ -101,11 +101,11 @@ void setup() {
   server.onNotFound(handleNotFound);
   server.begin();  // Web server start
   loadCredentials();           // Load WLAN credentials from network
-  
-   if (oscIP != "OK" && oscIP != "") {
-   outIp.fromString(oscIP);
+
+  if (oscIP != "OK" && oscIP != "") {
+    outIp.fromString(oscIP);
   }
-  
+
   connect = strlen(ssid) > 0;  // Request WLAN connect if there is a SSID
   Udp.begin(localPort);
 }
@@ -158,13 +158,13 @@ void loop() {
   // HTTP
   server.handleClient();
   delay(1);
-  if (outIp != IPAddress(0, 0, 0, 0) && WiFi.localIP()!= IPAddress(0, 0, 0, 0)) {
+  if (outIp != IPAddress(0, 0, 0, 0) && WiFi.localIP() != IPAddress(0, 0, 0, 0)) {
     StringReady = false;
     receiveFromSerial();
     if (StringReady) {
-      AnalogSendToOsc(analogValues);
+   //   AnalogSendToOsc(analogValues);
       // ToggleSendToOsc();
-      ProximitySendToOsc(ElectrodeValues);
+      ProximitySendToOscWekinator(ElectrodeValues);
     }
   }
 }
