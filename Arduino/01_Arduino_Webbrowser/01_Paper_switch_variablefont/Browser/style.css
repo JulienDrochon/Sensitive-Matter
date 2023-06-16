@@ -1,0 +1,12 @@
+@font-face {
+    font-family: "vf";
+    src: url("Service_Gothic_v0.1_Variable.woff2") format("woff2");
+   }
+   
+   body {padding: 0; margin: 0;} 
+
+#test{
+    font-family:vf;
+    font-size: 200px;color:red;
+    font-variation-settings: 'wght' 400;
+}
