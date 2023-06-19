@@ -95,6 +95,7 @@ void receiveFromSerial() {
 
 void ProximitySendToOscWekinator(int valElectrode[]) {
 
+
   String completeaddress = "/wek/inputs" ;
   const char * addr = completeaddress.c_str();
   String wekinatorMsg = "";
